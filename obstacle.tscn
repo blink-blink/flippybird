@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://gfiblfnbidu1"]
+
+[ext_resource type="Script" path="res://obstacle.gd" id="1_hdlrj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_30kub"]
+height = 20.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pfo2n"]
+height = 20.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wls3d"]
+size = Vector3(1, 2.48511, 1)
+
+[node name="Obstacle" type="AnimatableBody3D"]
+script = ExtResource("1_hdlrj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.0345, 0)
+shape = SubResource("CylinderShape3D_30kub")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.0345, 0)
+mesh = SubResource("CylinderMesh_pfo2n")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.37165, 0)
+shape = SubResource("CylinderShape3D_30kub")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.37165, 0)
+mesh = SubResource("CylinderMesh_pfo2n")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.83834, 0)
+shape = SubResource("BoxShape3D_wls3d")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
